@@ -11,7 +11,7 @@ pub struct Configuration {
 #[derive(Debug)]
 pub struct SomeData {
     counter: u64,
-    my_data: Vec<u8>,
+    my_data: Vec<u64>,
 }
 
 impl SomeData {
@@ -41,13 +41,14 @@ pub async fn _upload(config: web::Data<Configuration>, other_data: web::Data<Mut
     println!("{:?}", config);
 
     // do something with SomeData
-    data.counter = 10;
-    data.my_data.push(10);
+    let counter = data.counter + 1;
+    data.counter = counter;
+    data.my_data.push(counter);
     println!("{:?}", data);
 
     HttpResponse::Ok()
-    .content_type("plain/text")
-    .body("upload successful")
+        .content_type("plain/text")
+        .body("upload successful")
 }
 
 

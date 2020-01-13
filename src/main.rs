@@ -64,14 +64,15 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(
                 web::resource("/upload")
-                    .app_data(String::configure(|cfg| {
-                        // limit audio file size in bytes
-                        cfg.limit(1024 * 1024)
-                    }))
-                    .route(web::post().to(_upload))
                 .data(config.clone())
-                .app_data(some_data.clone()))
-            })
+                .app_data(some_data.clone())
+                .app_data(String::configure(|cfg| {
+                    // limit audio file size in bytes
+                    cfg.limit(1024 * 1024)
+                }))
+                .route(web::post().to(_upload))
+            )
+        })
         .bind("127.0.0.1:8080")?
         .run()
         .await

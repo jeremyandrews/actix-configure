@@ -41,7 +41,7 @@ App data is not configured, to configure use App::data()
 ```
 
 The error was fixed as follows:
-https://github.com/jeremyandrews/actix-configure/pull/1
+https://github.com/jeremyandrews/actix-configure/pull/1/files
 
 And the resulting code now works as expected:
 
